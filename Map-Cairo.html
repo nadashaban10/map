@@ -1,0 +1,119 @@
+﻿<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no" />
+    <link rel="stylesheet" type="text/css" href="style_2.css" />
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1, user-scalable=no">
+    <title> الخريطة التفاعلية </title>
+
+    <meta thhp-rquiv="X-UA-compatile" content="IE=edge,cheome=1">
+    <meta name="viewport" content="width=device-width, initial-scsle=1.0">
+
+    
+
+
+
+
+    <style>
+        html, body, #viewDiv {
+            padding: 0%;
+            margin: 0%;
+            height: 100%;
+            width: 100%;
+        }
+    </style>
+    <link rel="stylesheet" href="https://js.arcgis.com/4.18/esri/themes/light/main.css">
+    <script src="https://js.arcgis.com/4.18/"></script>
+
+    <script>
+        require([
+            "esri/config",
+            "esri/Map",
+            "esri/views/MapView",
+            "esri/layers/FeatureLayer",
+            "esri/widgets/ScaleBar",
+            "esri/widgets/Legend",
+            "esri/widgets/Editor"
+
+        ], function (esriConfig, Map, MapView, FeatureLayer, ScaleBar, Legend, Editor) {
+
+            esriConfig.apiKey = "AAPK1419feb67c5c4481b7ac1c738c3fc4ceAS3lJicvaavaoLpQw1Ko-gzplbZn87NN52oqVqELr7LWQeEKZj1I8-tFF8ho1k2P";
+
+            const map = new Map({
+                basemap: "arcgis-topographic"
+            });
+
+            const view = new MapView({
+                container: "viewDiv",
+                map: map,
+                center: [31.447849, 30.228001],
+                zoom: 13
+            });
+
+            //Trailheads feature layer (points)
+            const trailheadsLayer = new FeatureLayer({
+                url: "https://services7.arcgis.com/HoisxQx4WrL5fj6z/arcgis/rest/services/MyMapService/FeatureServer/0"
+            });
+            map.add(trailheadsLayer);
+
+           
+
+
+
+
+
+
+
+            const scalebar = new ScaleBar({
+                view: view
+            });
+            view.ui.add(scalebar, "bottom-left");
+            const legend = new Legend({
+                view: view
+            });
+            view.ui.add(legend, "top-right");
+
+            const editor = new Editor({
+                view: view
+            });
+            // Add widget to the view
+            view.ui.add(editor, "top-right");
+
+
+            
+
+
+            // Parks and open spaces (polygons)
+            const parksLayer = new FeatureLayer({
+                url: "https://services7.arcgis.com/HoisxQx4WrL5fj6z/arcgis/rest/services/MyMapService/FeatureServer/1"
+
+            });
+            map.add(parksLayer, 0);
+
+            // Parks and open spaces (polygons)
+            const parksLayerq = new FeatureLayer({
+                url: "https://services7.arcgis.com/HoisxQx4WrL5fj6z/arcgis/rest/services/MyMapService/FeatureServer/2"
+
+
+            });
+            map.add(parksLayerq, 0);
+
+            
+
+
+
+
+
+
+        });
+
+    </script>
+</head>
+<body>
+    <div id="viewDiv"></div>
+
+  
+</body>
+</html>
